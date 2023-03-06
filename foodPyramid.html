@@ -1,0 +1,673 @@
+<html>
+    <head>
+        <h2>  </h2>
+        <script>
+            var threshold = 0;
+            var threshold2 = 1;
+            var threshold3 = 2;
+            var threshold4 = 3;
+            var threshold5 = 5;
+            var threshold6 = 7;
+
+            
+            document.addEventListener("DOMContentLoaded", function() 
+            {
+
+                function thresholdButton() 
+                {
+                    var thresholdButton = document.getElementById('switchType');
+                    if (threshold == 0) //redundent threshhold with current recommendations
+                    {
+                      threshold = 0;
+
+                    } 
+                    else 
+                    {
+                      threshold = 0;
+                    }
+
+                    if (threshold2 == 1) 
+                    {
+                      threshold2 = 0;
+
+                    } 
+                    else 
+                    {
+                      threshold2 = 1;
+                    }
+
+                    if (threshold3 == 2) //threshold 3 is redundent as threshold does not change for this shelf
+                    {                    //but i will leave it in as future changes may utilize it.
+                      threshold3 = 2;
+
+                    } 
+                    else 
+                    {
+                      threshold3 = 2;  
+                    }
+                    
+                    if (threshold4 == 3) //threshold 4 is also redundent with current recommendations
+                    {                    
+                      threshold4 = 3;
+
+                    } 
+                    else 
+                    {
+                      threshold4 = 3;
+                    }
+                    
+                    if (threshold5 == 5) 
+                    {
+                      threshold5 = 4;
+
+                    } 
+                    else 
+                    {
+                      threshold5 = 5;
+                    }
+                    
+                    if (threshold6 == 7) 
+                    {
+                      threshold6 = 3;
+
+                    } 
+                    else 
+                    {
+                      threshold6 = 7;
+                    }
+                    
+                    if (threshold6 == 7) 
+                    {
+                        thresholdButton.innerHTML = 'Currently set to people aged 5+(Click to change)';
+                        
+
+                    } 
+                    else 
+                    {
+                        thresholdButton.innerHTML = 'Currently set to children ages 1-4(Click to change)';
+                    }
+
+                    
+                }
+                var thresholdButtonElement = document.getElementById('switchType');
+                thresholdButtonElement.addEventListener('click', thresholdButton);
+
+            });
+
+            function decrementButton1()
+            {
+                var count1 = document.getElementById('output1').innerHTML
+                if(count1 == 0)
+                {
+                    count1 = count1;
+                }
+                else
+                {
+                    count1--;
+                    var triangle = document.querySelectorAll('.triangle-up');
+                    triangle.forEach(triangle => 
+                    {
+                        triangle.style.borderBottom = (100 + ((count1+15) * 5)) + 'px solid rgb(242, 243, 175)';
+                    });
+                    document.getElementById('output1').innerHTML = count1;
+                    if (count1 > threshold) 
+                    {
+                        document.getElementById('output1').style.backgroundColor = 'red';
+                    }
+                    if (count1 < threshold) 
+                    {
+                        document.getElementById('output1').style.backgroundColor = 'orange';
+                    }
+                    if (count1 == threshold) 
+                    {
+                        document.getElementById('output1').style.backgroundColor = 'green';
+                    }
+                    
+                };
+            }
+
+            function incrementButton1()
+            {
+                var count1 = document.getElementById('output1').innerHTML
+                count1++;
+                document.getElementById('output1').innerHTML = count1;
+
+                var triangle = document.querySelectorAll('.triangle-up');
+                triangle.forEach(triangle => 
+                {
+                    triangle.style.borderBottom = (100 + ((count1+15) * 5)) + 'px solid rgb(242, 243, 175)';
+                });
+                if (count1 > threshold) 
+                {
+                    document.getElementById('output1').style.backgroundColor = 'red';
+                }
+                if (count1 < threshold) 
+                {
+                    document.getElementById('output1').style.backgroundColor = 'orange';
+                }
+                if (count1 == threshold) 
+                {
+                    document.getElementById('output1').style.backgroundColor = 'green';
+                }
+            };
+
+            function incrementButton2()
+            {
+                var count2 = document.getElementById('output2').innerHTML
+                count2++;
+                document.getElementById('output2').innerHTML = count2;
+
+                var trapezoid = document.querySelectorAll('.trapezoid');
+                trapezoid.forEach(trapezoid => 
+                {
+                    trapezoid.style.borderBottom = (100 + (count2 * 5)) + 'px solid rgb(241, 207, 192)';
+                });
+                if (count2 > threshold2) 
+                {
+                    document.getElementById('output2').style.backgroundColor = 'red';
+                }
+                if (count2 < threshold2) 
+                {
+                    document.getElementById('output2').style.backgroundColor = 'orange';
+                }
+                if (count2 == threshold2) 
+                {
+                    document.getElementById('output2').style.backgroundColor = 'green';
+                }
+                
+            };
+
+            function decrementButton2()
+            {
+
+                var count2 = document.getElementById('output2').innerHTML
+                if(count2 == 0)
+                {
+                    count2 = count2;
+                }
+                else
+                {
+                    count2--;
+                    var trapezoid = document.querySelectorAll('.trapezoid');
+                    trapezoid.forEach(trapezoid => 
+                    {
+                        trapezoid.style.borderBottom = (100 + (count2 * 5)) + 'px solid rgb(241, 207, 192)';
+                    });
+                    if (count2 > threshold2) 
+                    {
+                        document.getElementById('output2').style.backgroundColor = 'red';
+                    }
+                    if (count2 < threshold2) 
+                    {
+                        document.getElementById('output2').style.backgroundColor = 'orange';
+                    }
+                    if (count2 == threshold2) 
+                    {
+                        document.getElementById('output2').style.backgroundColor = 'green';
+                    }
+                }
+                document.getElementById('output2').innerHTML = count2;
+            };
+
+
+            function decrementButton3()
+            {
+                var count3 = document.getElementById('output3').innerHTML
+                if(count3 == 0)
+                {
+                    count3 = count3;
+                }
+                else
+                {
+                    count3--;
+                    var trapezoid1 = document.querySelectorAll('.trapezoid1');
+                    trapezoid1.forEach(trapezoid1 => 
+                    {
+                        trapezoid1.style.borderBottom = (100 + (count3 * 5)) + 'px solid rgb(70, 0, 199)';
+                    });
+                    if (count3 > threshold3) 
+                    {
+                        document.getElementById('output3').style.backgroundColor = 'red';
+                    }
+                    if (count3 < threshold3) 
+                    {
+                        document.getElementById('output3').style.backgroundColor = 'orange';
+                    }
+                    if (count3 == threshold3) 
+                    {
+                        document.getElementById('output3').style.backgroundColor = 'green';
+                    }
+                }
+                document.getElementById('output3').innerHTML = count3;
+            };
+            function incrementButton3()
+            {
+                var count3 = document.getElementById('output3').innerHTML
+                count3++;
+                document.getElementById('output3').innerHTML = count3;
+
+                var trapezoid1 = document.querySelectorAll('.trapezoid1');
+                trapezoid1.forEach(trapezoid1 => 
+                {
+                    trapezoid1.style.borderBottom = (100 + (count3 * 5)) + 'px solid rgb(70, 0, 199)';
+                });
+                if (count3 > threshold3) 
+                {
+                    document.getElementById('output3').style.backgroundColor = 'red';
+                }
+                if (count3 < threshold3) 
+                {
+                    document.getElementById('output3').style.backgroundColor = 'orange';
+                }
+                if (count3 == threshold3) 
+                {
+                    document.getElementById('output3').style.backgroundColor = 'green';
+                }
+            };
+
+
+            function decrementButton4()
+            {
+                var count4 = document.getElementById('output4').innerHTML
+                if(count4 == 0)
+                {
+                    count4 = count4;
+                }
+                else
+                {
+                    count4--;
+                    var trapezoid2 = document.querySelectorAll('.trapezoid2');
+                    trapezoid2.forEach(trapezoid2 => 
+                    {
+                        trapezoid2.style.borderBottom = (100 + (count4 * 5)) + 'px solid rgb(163, 64, 64)';
+                    });
+                    if (count4 > threshold4) 
+                    {
+                        document.getElementById('output4').style.backgroundColor = 'red';
+                    }
+                    if (count4 < threshold4) 
+                    {
+                        document.getElementById('output4').style.backgroundColor = 'orange';
+                    }
+                    if (count4 == threshold4) 
+                    {
+                        document.getElementById('output4').style.backgroundColor = 'green';
+                    }
+                    
+                }
+                document.getElementById('output4').innerHTML = count4;
+            };
+            function incrementButton4()
+            {
+                var count4 = document.getElementById('output4').innerHTML
+                count4++;
+                document.getElementById('output4').innerHTML = count4;
+
+                var trapezoid2 = document.querySelectorAll('.trapezoid2');
+                trapezoid2.forEach(trapezoid2 => 
+                {
+                    trapezoid2.style.borderBottom = (100 + (count4 * 5)) + 'px solid rgb(163, 64, 64)';
+                });
+                if (count4 > threshold4) 
+                {
+                    document.getElementById('output4').style.backgroundColor = 'red';
+                }
+                if (count4 < threshold4) 
+                {
+                    document.getElementById('output4').style.backgroundColor = 'orange';
+                }
+                if (count4 == threshold4) 
+                {
+                    document.getElementById('output4').style.backgroundColor = 'green';
+                }
+                
+            };
+
+
+            function decrementButton5()
+            {
+                var count5 = document.getElementById('output5').innerHTML
+                if(count5 == 0)
+                {
+                    count5 = count5;
+                }
+                else
+                {
+                    count5--;
+                    var trapezoid3 = document.querySelectorAll('.trapezoid3');
+                    trapezoid3.forEach(trapezoid3 => 
+                    {
+                        trapezoid3.style.borderBottom = (100 + (count5 * 5)) + 'px solid #04c20e';
+                    });
+                    if (count5 == threshold5) 
+                    {
+                        document.getElementById('output5').style.backgroundColor = 'green';
+                    }
+                    if (count5 < threshold5) 
+                    {
+                        document.getElementById('output5').style.backgroundColor = 'orange';
+                    }
+                }
+                document.getElementById('output5').innerHTML = count5;
+            };
+            function incrementButton5()
+            {
+                var count5 = document.getElementById('output5').innerHTML
+                count5++;
+                document.getElementById('output5').innerHTML = count5;
+
+                var trapezoid3 = document.querySelectorAll('.trapezoid3');
+                trapezoid3.forEach(trapezoid3 => 
+                {
+                    trapezoid3.style.borderBottom = (100 + (count5 * 5)) + 'px solid #04c20e';
+                });
+                if (count5 > threshold5) 
+                {
+                    document.getElementById('output5').style.backgroundColor = 'red';
+                }
+                if (count5 < threshold5) 
+                {
+                    document.getElementById('output5').style.backgroundColor = 'orange';
+                }
+                if (count5 == threshold5) 
+                {
+                    document.getElementById('output5').style.backgroundColor = 'green';
+                }
+            };
+
+
+            function decrementButton6()
+            {
+                var count6 = document.getElementById('output6').innerHTML
+                if(count6 == 0)
+                {
+                    count6 = count6;
+                }
+                else
+                {
+                    count6--;
+                    var trapezoid4 = document.querySelectorAll('.trapezoid4');
+                    trapezoid4.forEach(trapezoid4 => 
+                    {
+                        trapezoid4.style.borderBottom = (100 + (count6 * 5)) + 'px solid #fa0d0d';
+                    });
+                    if (count6 > threshold6) 
+                    {
+                        document.getElementById('output6').style.backgroundColor = 'red';
+                    }
+                    if (count6 < threshold6) 
+                    {
+                        document.getElementById('output6').style.backgroundColor = 'orange';
+                    }
+                    if (count6 == threshold6) 
+                    {
+                        document.getElementById('output6').style.backgroundColor = 'green';
+                    }
+                }
+                document.getElementById('output6').innerHTML = count6;
+            };
+            function incrementButton6()
+            {
+                var count6 = document.getElementById('output6').innerHTML
+                count6++;
+                document.getElementById('output6').innerHTML = count6;
+
+                var trapezoid4 = document.querySelectorAll('.trapezoid4');
+                trapezoid4.forEach(trapezoid4 => 
+                {
+                    trapezoid4.style.borderBottom = (100 + (count6 * 5)) + 'px solid #fa0d0d';
+                });
+                if (count6 > threshold6) 
+                {
+                    document.getElementById('output6').style.backgroundColor = 'red';
+                }
+                if (count6 < threshold6) 
+                {
+                    document.getElementById('output6').style.backgroundColor = 'orange';
+                }
+                if (count6 == threshold6) 
+                {
+                    document.getElementById('output6').style.backgroundColor = 'green';
+                }
+            };
+
+            
+        </script>
+        <title> CS230 example2 </title>  <!-- inline 1, internal 2, external 3-->
+        <style>
+            .wrapper
+            {
+                margin-top:0px;
+                padding-top:0px;
+                
+            }
+            .triangle-up 
+            {
+	        width: 0;
+	        height: 0;
+	        border-left: 100px solid transparent;
+	        border-right: 100px solid transparent;
+	        border-bottom: 175px solid  rgb(242, 243, 175);
+            position:relative;
+            }
+            .triangle-up .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .triangle-up:hover .container 
+            {
+                display: flex;
+            }
+            
+            .trapezoid 
+            {
+	        border-bottom: 100px solid  rgb(241, 207, 192);
+	        border-left: 50px solid transparent;
+	        border-right: 50px solid transparent;
+	        height: 50px;
+	        width: 210px;
+            padding: 0%;
+            margin-top: -40px;
+            
+            }
+
+            .trapezoid .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .trapezoid:hover .container 
+            {
+                display: flex;
+            }
+
+            .trapezoid1 
+            {
+	        border-bottom: 100px solid rgb(70, 0, 199) ;
+	        border-left: 50px solid transparent;
+	        border-right: 50px solid transparent;
+	        height: 50px;
+	        width: 320px;
+            padding: 0%;
+            margin-top: -40px;
+            }
+
+            .trapezoid1 .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .trapezoid1:hover .container 
+            {
+                display: flex;
+            }
+
+
+            .trapezoid2 
+            {
+	        border-bottom: 100px solid rgb(163, 64, 64) ;
+	        border-left: 50px solid transparent;
+	        border-right: 50px solid transparent;
+	        height: 50px;
+	        width: 420px;
+            padding: 0%;
+            margin-top: -50px;
+            }
+
+            .trapezoid2 .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .trapezoid2:hover .container 
+            {
+                display: flex;
+            }
+
+
+            .trapezoid3 {
+	        border-bottom: 100px solid #04c20e;
+	        border-left: 50px solid transparent;
+	        border-right: 50px solid transparent;
+	        height: 50px;
+	        width: 520px;
+            padding: 0%;
+            margin-top: -50px;
+            }
+
+            .trapezoid3 .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .trapezoid3:hover .container 
+            {
+                display: flex;
+            }
+
+            .trapezoid4 
+            {
+	        border-bottom: 100px solid #fa0d0d;
+	        border-left: 50px solid transparent;
+	        border-right: 50px solid transparent;
+	        height: 50px;
+	        width: 620px;
+            padding: 0%;
+            margin-top: -50px;
+            }
+            .trapezoid4 .container 
+            {
+                justify-content: center;
+                display: none;
+            }
+            .trapezoid4:hover .container 
+            {
+                display: flex;
+            }
+            
+        </style>
+    </head>
+    <body style="background-color:rgb(0, 140, 255);"> 
+        <center> 
+
+                <form >
+                    <label style="color: white;">Date:</label>
+                    <input type="date" id="date" name="inputdate" required min="" max=""> <!--date validation as user can only pick the date of whatever day it currently is -->
+                </form>
+                <script>
+                    document.getElementById("date").min = new Date().toISOString().split("T")[0];
+                    document.getElementById("date").max = new Date().toISOString().split("T")[0];
+                </script>
+
+        <div style="background-image: url('https://cdn8.dissolve.com/p/D2115_120_316/D2115_120_316_1200.jpg'); size: calc(); background-size: cover;"> 
+            <div class = "wrapper">
+                <button  id="switchType" style="font-size: xx-large; background-color: black; color: #ffffff;">Currently set to people aged 5+(Click to change)</button> 
+                
+                <div class="triangle-up">
+                    <br><br><br><br><br>
+                    <div >
+                        <div style="display: flex; justify-content: center;"> 
+                                <input style=" font-size: xx-large; color: #04c20e;" class = "container" type="button" value="-" onclick="decrementButton1();" />
+                                <button id="output1" style="font-size: xx-large; background-color:green; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff; ">0</button>
+                                <input style=" font-size: xx-large; color: #fa0d0d;" class = "container" type="button" value="+" onclick="incrementButton1();" /> 
+                        </div>
+                        <p> S.1</p>
+                    </div>
+                        
+                </div>
+            </div>
+
+                <div class="trapezoid "> 
+                    <br><br><br><br> 
+                    <div style="display: flex; justify-content: center;"> 
+                        <input style=" font-size: xx-large; color: #04c20e;" class = "container" type="button" value="  -  " onclick="decrementButton2();" />
+                        <button id="output2" style="font-size: xx-large; background-color: green; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff;">0</button>
+                        <input style=" font-size: xx-large; color: #fa0d0d;" class = "container" type="button" value="  +  " onclick="incrementButton2();" /> 
+
+
+                    </div>
+                    <p> Shelf 2</p>
+                </div>
+
+                <div class="trapezoid1 ">
+                    <br><br><br><br> 
+                    <div style="display: flex; justify-content: center;"> 
+                        <input style=" font-size: xx-large; color: #04c20e;" class = "container" type="button" value="  -  " onclick="decrementButton3();" />
+                        <button id="output3" style="font-size: xx-large; background-color: orange; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff;">0</button>
+                        <input style=" font-size: xx-large; color: rgb(255, 251, 0);" class = "container" type="button" value="  +  " onclick="incrementButton3();" /> 
+                    </div>
+                    <p> Shelf 3</p>
+                </div>
+
+                <div class="trapezoid2 ">
+                    <br><br><br><br> 
+                    <div style="display: flex; justify-content: center;"> 
+                        <input style=" font-size: xx-large; color: rgb(255, 251, 0);" class = "container" type="button" value="  -  " onclick="decrementButton4();" />
+                        <button id="output4" style="font-size: xx-large; background-color: orange; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff;">0</button>
+                        <input style=" font-size: xx-large; color: rgb(255, 251, 0);" class = "container" type="button" value="  +  " onclick="incrementButton4();" /> 
+                    </div>
+                    <p> Shelf 4</p>
+                </div>
+
+                <div id="change1" class="trapezoid3 ">
+                    <br><br><br><br> 
+                    <div style="display: flex; justify-content: center;"> 
+                        <input style=" font-size: xx-large; color: #fa0d0d;" class = "container" type="button" value="  -  " onclick="decrementButton5();" />
+                        <button id="output5" style="font-size: xx-large; background-color: orange; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff;">0</button>
+                        <input style=" font-size: xx-large; color: #04c20e;" class = "container" type="button" value="  +  " onclick="incrementButton5();" /> 
+                    </div>
+                    <p> Shelf 5</p>
+                </div>
+
+                <div 
+                <div id="change2" class="trapezoid4 ">
+                    <br><br><br><br> 
+                    <div style="display: flex; justify-content: center;"> 
+                        <input style=" font-size: xx-large; color: #fa0d0d;" class = "container" type="button" value="  -  " onclick="decrementButton6();" />
+                        <button id="output6" style="font-size: xx-large; background-color: orange; border: 1px solid #ccc; border-radius: 50%; padding: 3px 5px; color: #ffffff;">0</button>
+                        <input style=" font-size: xx-large; color: #04c20e;" class = "container" type="button" value="  +  " onclick="incrementButton6();" /> 
+                    </div>
+                    <p> Shelf 6</p>
+                </div>
+                
+
+                    <p style=" margin: 0; font-size: xx-large; background-color: yellow; ">Orange = too few,  Green = perfect amount,  Red = too many</p>
+                    <p style=" margin: 0;  font-size: large; background-color: rgb(242, 243, 175); ">S.1=Food high in fat, sugar and salt </p>
+                    <p style=" margin: 0; font-size: large; background-color: rgb(241, 207, 192); ">S.2=Fats, spreads and oils </p>
+                    <p style="color: white; margin: 0; font-size: large; background-color: rgb(70, 0, 199); ">S.3=Meat, Poultry, fish, eggs, beans, nuts </p>
+                    <p style="color: white; margin: 0; font-size: large; background-color: rgb(163, 64, 64); ">S.4=Milk, yogurt and cheese </p>
+                    <p style="color: white; margin: 0; font-size: large; background-color: #7e5901; ">S.5=Vegetables, salad and fruit(5+ years) OR Cereal, Breads, Potatos, pasta and rice(1-4 years) </p>
+                    <p style="color: white; margin: 0; font-size: large; background-color:  #7e5901; ">S.6=Cereal, Breads, Potatos, pasta and rice(5+ years) OR Vegetables, salad and fruit(1-4 years)</p>
+
+            
+                <h1 style=" color: blue; background-image: url('https://th.bing.com/th/id/OIP.HBMEPpOvshjNJGWQhlQIBwAAAA?pid=ImgDet&rs=1');"> Welcome to your Daily Check-in <br><br><br><br>
+        </div>
+
+                
+            
+        </center>
+        
+    </body>
+
+</html>  <!-- centre div, what a div is, what the buttons are and do-->
