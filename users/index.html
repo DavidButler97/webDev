@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+  crossorigin="anonymous"></script>
+  
+  <!-- works in Chrome, OS used = windows 10 -->
+  <!-- DB name = users -->
+  <!-- XXAMP database and server used-->
+  <!-- datadump provided in .sql format-->
+  <!-- Command Line Interface interaction php files placed in folder named "CLI php files"-->
+
+
+<head>
+
+</head>
+
+<body>
+    <style>
+		form 
+		{
+			margin: 20px;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+		}
+
+		label 
+		{
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		input[type=text],
+		input[type=email],
+		input[type=tel] 
+		{
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 4px;
+		}
+
+		input[type=submit] 
+		{
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type=submit]:hover 
+		{
+			background-color: #45a049;
+		}
+		header 
+		{
+			background-color: #333;
+			color: #fff;
+			padding: 10px 20px;
+		}
+
+		#console 
+		{
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        overflow: auto;
+        height: 400px;
+    	}
+    	#console pre 
+		{
+        margin: 0;
+        white-space: pre-wrap;
+    	}
+
+	</style>
+
+<!-- FRONT END FORMS. -->
+	<!-- we add php file in action as file is in the same directory. -->
+	 <details style="font-size: 48px;"> <!-- This format makes for a way cleaner page as forms arnt as cluttered around now that theyre drop down -->
+		<summary>Create new entry in database</summary>
+		<form style="font-size: 24px" id="create" method="POST" action="users_api_call.php" onsubmit="clearFormFields('create'); return true;">
+
+			<label for="title">Title:</label>
+			<input type="text" id="title" name="title" oninput="validateTitle()" >
+			<br />
+			<label for="first_name">First Name:</label>
+			<input type="text" id="first_name" name="first_name" required>
+			<br />
+			<label for="last_name">Last Name:</label>
+			<input type="text" id="last_name" name="last_name" required>
+			<br />
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+			<br />
+			<label for="phone">Phone:</label>
+			<input type="tel" id="phone" name="phone" required>
+			<br />
+			<label for="address_line_1">Address Line 1:</label>
+			<input type="text" id="address_line_1" name="address_line_1" required>
+			<br />
+			<label for="address_line_2">Address Line 2:</label>
+			<input type="text" id="address_line_2" name="address_line_2">
+			<br />
+			<label for="town">Town:</label>
+			<input type="text" id="town" name="town" required>
+			<br />
+			<label for="county">County:</label>
+			<input type="text" id="county" name="county" required>
+			<br />
+			<label for="eircode">Eircode:</label>
+			<input type="text" id="eircode" name="eircode" >
+			<br />
+			<input type="submit" value="Submit" >
+		  </form> 
+	  </details>
+	  
+	  
+	  <details style="font-size: 48px;">
+		<summary>Search User in database</summary>
+		<form style="font-size: 24px" id="retrieve" method="get" action="users_api_call_Retrieve.php" onsubmit="clearFormFields('retrieve'); return true;" >
+				<label for="search">Search Users By first name:</label>
+				<input type="text" id="search" name="search">
+				<input type="submit" value="Search" >
+			<!-- <input type="text" id="search" onkeyup="searchUsers(this.value)">
+			<select id="user-list"></select> -->
+		</form>
+	  </details>
+	
+
+		<details style="font-size: 48px;">
+			<summary>Update User Information in database</summary>
+			<form style="font-size: 24px" id="update" method="post" action="users_api_call_Update.php" onsubmit="clearFormFields('update'); return true;" >
+				<label for="id">Enter the ID of the record you want to change:</label>
+				<input type="number" name="id" id="id" required/>  
+				<br />
+				<label for="title">New Title:</label>
+				<input type="text" name="title" id="title" oninput="validateTitle()" />
+				<br />
+				<label for="email">New Email Address:</label>
+				<input type="email" name="email" id="email"  required/>
+				<br />
+				<label for="phone">New Mobile Number:</label>
+				<input type="tel" name="phone" id="phone"  required/>
+				<br />
+				<label for="address_line_1">New Address Line 1:</label>
+				<input type="text" name="address_line_1" id="address_line_1" required />
+				<br />
+				<label for="address_line_2">New Address Line 2:</label>
+				<input type="text" name="address_line_2" id="address_line_2" required/>
+				<br />
+				<label for="town">New Town:</label>
+				<input type="text" name="town" id="town"  required/>
+				<br />
+				<label for="county">New County/City:</label>
+				<input type="text" name="county" id="county"  required/>
+				<br />
+				<label for="eircode">New Eircode:</label>
+				<input type="text" name="eircode" id="eircode" required />
+				<br />
+				<input type="submit" name="Update" value="Update" />
+			</form>
+		  </details>
+
+	<details style="font-size: 48px;">
+		<summary>delete user record from database</summary>
+		<form style="font-size: 24px" id="delete" method="POST" action="users_api_call_delete.php" onsubmit="clearFormFields('delete'); return true;" >
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+			<br />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+			<br />
+            <label for="phone">Phone:</label>
+			<input type="tel" id="phone" name="phone" required>
+            <input type="submit" value="Delete" >
+	</form>
+	  </details>
+	
+	<h1>\/ ON SCREEN CONSOLE \/</h1>
+	<div style="font-size: x-large;  background-color: black; color: white;" id="console"></div>
+
+	<script> 
+		//sets up an event listener that executes when the document is ready.
+		$(document).ready(function() 
+		{
+			//sets up an event listener that executes when a form is submitted.
+			$('form').submit(function(event) 
+			{
+				// prevent default form submission behavior.
+				event.preventDefault();
+
+				//gathers the form data using the jQuery serialize() method.
+				var formData = $(this).serialize();
+
+				// submit data with AJAX.
+				$.ajax(
+				{
+					//sets the URL of the server to which the form data will be submitted.
+					url: $(this).attr('action'),
+					//sets the HTTP method used to submit the form data.
+					type: $(this).attr('method'),
+					//sets the form data that will be submitted to the server.
+					data: formData,
+					//sets the function that will be executed if the server returns a successful response.
+					success: function(response) 
+					{
+						//logs the response to the console.
+						console.log(response);
+						
+					},
+					//sets the function that will be executed if the server returns an error response.
+					error: function(xhr, status, error) 
+					{
+						//logs the error response to the console.
+						console.log(xhr.responseText);
+					}
+				});
+			});
+		});
+
+		var consoleOutput = document.getElementById('console'); // onscreen console.
+		console.log = function(message) 
+		{
+			consoleOutput.innerHTML += message + '<br>'; //adding console messages to onscreen console.
+			
+		};
+
+		function validateTitle() //function to validate the title collumn.
+		{
+			const titleInput = document.getElementById("title");
+			const title = titleInput.value.trim().toLowerCase();
+
+			if ( !["mx", "ms", "mr", "mrs", "miss", "dr", "other"].includes(title)) 
+			{ // if there is input in title field but input isnt the above then we prompt user to enter a valid one.
+				titleInput.setCustomValidity("Please enter a valid title (Mx, Ms, Mr, Mrs, Miss, Dr, or Other)");
+			} 
+			else 
+			{
+				titleInput.setCustomValidity("");
+			}
+		}
+
+
+		function clearFormFields(formId) //function for clearing input fields.
+		{
+			// Get the form element by ID.
+			const form = document.getElementById(formId);
+
+			// Wait for 1.5 seconds before clearing the form.
+			setTimeout(() => 
+			{
+				for (let i = 0; i < form.elements.length; i++) 
+				{
+					const element = form.elements[i];
+
+					// Clear the value of the element if it's an input or textarea.
+					if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.type !== 'submit') 
+					{
+						element.value = '';
+					}
+				}
+			}, 1500);
+		}
+
+	</script>
+
+</body>
+</html>
