@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "642d58eb5c5a9e251dc9993a"
+  },
+  "mobilephoneinfo": [
+    {
+      "Manufacturer": "Apple",
+      "Model": "iPhone 13",
+      "Price": 999
+    },
+    {
+      "Manufacturer": "Samsung",
+      "Model": "Galaxy S22",
+      "Price": 899
+    },
+    {
+      "Manufacturer": "OnePlus",
+      "Model": "9 Pro",
+      "Price": 999
+    },
+    {
+      "Manufacturer": "Google",
+      "Model": "Pixel 6",
+      "Price": 699
+    },
+    {
+      "Manufacturer": "Xiaomi",
+      "Model": "Mi 11",
+      "Price": 799
+    },
+    {
+      "Manufacturer": "LG",
+      "Model": "V60 ThinQ",
+      "Price": 899
+    },
+    {
+      "Manufacturer": "Motorola",
+      "Model": "Edge+",
+      "Price": 999
+    },
+    {
+      "Manufacturer": "Nokia",
+      "Model": "8.3 5G",
+      "Price": 499
+    },
+    {
+      "Manufacturer": "Sony",
+      "Model": "Xperia 5 III",
+      "Price": 999
+    },
+    {
+      "Manufacturer": "Asus",
+      "Model": "ROG Phone 5",
+      "Price": 999
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "643589745790d34b0d06395d"
+  },
+  "Manufacturer": "XPRESSE",
+  "Model": "XYZ",
+  "Price": "999"
+}]

@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "642eafcd5c5a9e251dc99963"
+  },
+  "customerpurchases": [
+    {
+      "order_id": 1,
+      "customer_id": 123,
+      "date": "2023-04-05T09:30:00Z",
+      "items": [
+        {
+          "item_id": 456,
+          "name": "iPhone 13",
+          "price": 999.99
+        },
+        {
+          "item_id": 789,
+          "name": "Samsung Galaxy S22",
+          "price": 899.99
+        }
+      ]
+    },
+    {
+      "order_id": 2,
+      "customer_id": 456,
+      "date": "2023-04-04T13:45:00Z",
+      "items": [
+        {
+          "item_id": 123,
+          "name": "Google Pixel 6",
+          "price": 799.99
+        },
+        {
+          "item_id": 789,
+          "name": "Samsung Galaxy S22",
+          "price": 899.99
+        }
+      ]
+    },
+    {
+      "order_id": 3,
+      "customer_id": 123,
+      "date": "2023-04-03T17:15:00Z",
+      "items": [
+        {
+          "item_id": 456,
+          "name": "iPhone 13",
+          "price": 999.99
+        }
+      ]
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6435648d5790d34b0d06395a"
+  },
+  "order_id": "4",
+  "customer_id": "100",
+  "date": "2023-04-20T15:56",
+  "items": "all the good stuff"
+}]

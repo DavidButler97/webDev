@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This was run on chrome with a windows 10 OS, The name of the mongodb database my collections are in is "local" -->
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+  crossorigin="anonymous"></script>
+<head>
+
+</head>
+
+<body>
+    <style>
+		form 
+		{
+			margin: 20px;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+		}
+
+		label 
+		{
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		input[type=text],
+		input[type=email],
+		input[type=tel] 
+		{
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 2px solid #ccc;
+			border-radius: 4px;
+		}
+
+		input[type=submit] 
+		{
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type=submit]:hover 
+		{
+			background-color: #45a049;
+		}
+		header 
+		{
+			background-color: #333;
+			color: #fff;
+			padding: 10px 20px;
+		}
+
+		#console 
+		{
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        overflow: auto;
+        height: 400px;
+    	}
+    	#console pre 
+		{
+        margin: 0;
+        white-space: pre-wrap;
+    	}
+
+	</style>
+
+<!-- FRONT END FORMS. -->
+	<!-- we add php file in action as file is in the same directory.    onsubmit="clearFormFields('create');  -->
+<details style="font-size: 48px;" >
+	<summary>User Personal Info</summary>
+	<details style="font-size: 36px;color: darkslategray;"> <!-- This format makes for a way cleaner page as forms arnt as cluttered around now that theyre drop down -->
+		<summary>Create new entry Customer personal info</summary>
+		<form style="font-size: 24px " id="create" method="POST" action="mongodbCreate.php" onsubmit="clearFormFields('create');  return true;">
+
+            <label for="customer_id">Customer ID:</label>
+			<input type="number" id="customer_id" name="customer_id" >
+			<br />
+			<label for="Title">Title:</label>
+			<input type="text" id="Title" name="Title" oninput="validateTitle()" >
+			<br />
+			<label for="First_Name">First Name:</label>
+			<input type="text" id="First_Name" name="First_Name" required>
+			<br />
+			<label for="Surname">Last Name:</label>
+			<input type="text" id="Surname" name="Surname" required>
+			<br />
+			<label for="Email_Address">Email:</label>
+			<input type="email" id="Email_Address" name="Email_Address" required>
+			<br />
+			<label for="Mobile">Mobile Phone:</label>
+			<input type="tel" id="Mobile" name="Mobile" required>
+			<br />
+			<label for="Address_Line_1">Address Line 1:</label>
+			<input type="text" id="Address_Line_1" name="Address_Line_1" required>
+			<br />
+			<label for="Address_Line_2">Address Line 2:</label>
+			<input type="text" id="Address_Line_2" name="Address_Line_2">
+			<br />
+			<label for="Town">Town:</label>
+			<input type="text" id="Town" name="Town" required>
+			<br />
+			<label for="County/City">County:</label>
+			<input type="text" id="County/City" name="County/City" required>
+			<br />
+			<label for="EIRCODE">Eircode:</label>
+			<input type="text" id="EIRCODE" name="EIRCODE" >
+			<br />
+			<input type="submit" value="Submit" >
+		</form> 
+	</details>
+	  
+	  
+	  <details style="font-size: 36px; color: darkslategray;">
+		<summary>Search Customer info</summary>
+		<form style="font-size: 24px" id="retrieve" method="get" action="MongoDBRetrieve.php" onsubmit="clearFormFields('retrieve'); return true;" >
+				<label for="search">Search Users By first name:</label>
+				<input type="text" id="search" name="search">
+				<input type="submit" value="Search" >
+		</form>
+	  </details>
+	
+
+		<details style="font-size: 36px;color: darkslategray;">
+			<summary>Update Customer Information </summary>
+			<form style="font-size: 24px" id="update" method="put" action="MongoDBUpdate.php" onsubmit="clearFormFields('update'); return true;" >
+				<label for="customer_id">Enter the Customer ID of the record you want to change:</label>
+			<input type="number" id="customer_id" name="customer_id" required>
+				<br />
+				<label for="Title">New Title:</label>
+			<input type="text" id="Title" name="Title" oninput="validateTitle()" >
+			<br />
+			<label for="First_Name">New First Name:</label>
+			<input type="text" id="First_Name" name="First_Name" required>
+			<br />
+			<label for="Surname">New Last Name:</label>
+			<input type="text" id="Surname" name="Surname" required>
+			<br />
+			<label for="Email_Address">New Email:</label>
+			<input type="email" id="Email_Address" name="Email_Address" required>
+			<br />
+			<label for="Mobile">New Mobile Phone:</label>
+			<input type="tel" id="Mobile" name="Mobile" required>
+			<br />
+			<label for="Address_Line_1">New Address Line 1:</label>
+			<input type="text" id="Address_Line_1" name="Address_Line_1" required>
+			<br />
+			<label for="Address_Line_2">New Address Line 2:</label>
+			<input type="text" id="Address_Line_2" name="Address_Line_2">
+			<br />
+			<label for="Town">New Town:</label>
+			<input type="text" id="Town" name="Town" required>
+			<br />
+			<label for="County/City">New County:</label>
+			<input type="text" id="County/City" name="County/City" required>
+			<br />
+			<label for="EIRCODE">New Eircode:</label>
+			<input type="text" id="EIRCODE" name="EIRCODE" >
+				<br />
+				<input type="submit" name="Update" value="Update" />
+			</form>
+		  </details>
+
+	<details style="font-size: 36px;color: darkslategray;">
+		<summary>delete from Customer Personal Info collection</summary>
+		<form style="font-size: 24px" id="delete" method="POST" action="MongoDBDelete.php" onsubmit="clearFormFields('delete'); return true;" >
+            <label for="First_Name">First Name:</label>
+			<input type="text" id="First_Name" name="First_Name" required>
+			<br />
+            <label for="Email_Address">Email:</label>
+			<input type="email" id="Email_Address" name="Email_Address" required>
+			<br />
+            <label for="Mobile">Mobile Phone:</label>
+			<input type="tel" id="Mobile" name="Mobile" required>
+			<br />
+            <input type="submit" value="Delete" >
+		</form>
+	</details>
+</details>
+<!-- ==================== -->
+<details style="font-size: 48px;" >
+	<summary>Customer Purchases</summary>
+	<details style="font-size: 36px;color: darkslategray;"> <!-- This format makes for a way cleaner page as forms arnt as cluttered around now that theyre drop down -->
+		<summary>Create new entry in Customer Purchases</summary>
+		<form style="font-size: 24px" method="post" id="create" action="customerpurchasesCreate.php" onsubmit= "clearFormFields('create');return true;" >
+			<label for="order_id">Order ID:</label>
+			<input type="number" id="order_id" name="order_id" required>
+			<br>
+			<label for="customer_id">Customer ID:</label>
+			<input type="number" id="customer_id" name="customer_id" required>
+			<br>
+			<label for="date">Date:</label>
+			<input type="datetime-local" id="date" name="date" required>
+			<br>	
+			<label for="items">Items:</label >
+			<textarea id="items" name="items"></textarea>
+			<br>	
+			<input type="submit" value="Submit">
+		</form>
+	</details>
+	  
+	  
+	  <details style="font-size: 36px;color: darkslategray;">
+		<summary>Search Customer Purchases collection</summary>
+		<form style="font-size: 24px" id="retrieve" method="get" action="customerpurchasesRetrieve.php" onsubmit="clearFormFields('retrieve'); return true;" >
+			<label for="order_id">Search by Order ID:</label>
+			<input type="number" id="order_id" name="order_id" required>
+			<br>  
+			<input type="submit" value="Retrieve">
+		</form>
+	  </details>
+	
+
+		<details style="font-size: 36px;color: darkslategray;">
+			<summary>Update Customer purchases collection</summary>
+			<form form style="font-size: 24px" id="update" method="post" action="customerpurchasesUpdate.php">
+				<label for="order_id">Enter Order ID of record you want to update:</label>
+				<input type="number" id="order_id" name="order_id" required>
+				<br>
+				<label for="customer_id">New Customer ID:</label>
+				<input type="number" id="customer_id" name="customer_id" required>
+				<br>
+				<label for="date">New Date:</label>
+				<input type="datetime-local" id="date" name="date"required>
+				<br>    
+				<label for="items">New Items:</label>
+				<textarea id="items" name="items"></textarea>
+				<br>    
+				<input type="submit" value="Update">
+			</form>
+			
+		  </details>
+
+	<details style="font-size: 36px;color: darkslategray;">
+		<summary>delete from customer purchases collection</summary>
+		<form style="font-size: 24px" id="delete" method="POST" action="customerpurchasesDelete.php" onsubmit="clearFormFields('delete'); return true;" >
+            <label for="order_id">Order ID of record you want to delete:</label>
+			<input type="number" id="order_id" name="order_id" required>
+			<br>  
+			<input type="submit" value="Delete">
+		</form>
+	</details>
+</details>
+<!-- ======================================= -->
+<details style="font-size: 48px;" >
+	<summary>Shop Mobile Phone collection</summary>
+	<details style="font-size: 36px;color: darkslategray;"> <!-- This format makes for a way cleaner page as forms arnt as cluttered around now that theyre drop down -->
+		<summary>Create new entry in mobile phone collection</summary>
+		<form style="font-size: 24px" id="create" method="POST" action="mobilephoneCreate.php" return true;">
+
+			<label for="manufacturer">Manufacturer:</label>
+			<input type="text" id="manufacturer" name="manufacturer" required>
+			<br />
+			<label for="model">Model:</label>
+			<input type="text" id="model" name="model" required>
+			<br />
+			<label for="price">Price:</label>
+			<input type="number" id="price" name="price" required>
+			<br />
+			<input type="submit" value="Submit">
+			</form>
+	</details>
+	  
+	  
+	  <details style="font-size: 36px;color: darkslategray;">
+		<summary>Search mobile phone in collection</summary>
+		<form style="font-size: 24px" id="retrieve" method="get" action="mobilephoneRetrieve.php" onsubmit="clearFormFields('retrieve'); return true;" >
+			<label for="model">type the Model of the record you want to retrieve:</label>
+			<input type="text" id="model" name="model" required>
+			<br />
+			<input type="submit" value="Retrieve">
+		</form>
+	  </details>
+	
+
+		<details style="font-size: 36px;color: darkslategray;">
+			<summary>Update mobile phone info</summary>
+			<form style="font-size: 24px" id="update" method="post" action="mobilephoneUpdate.php" onsubmit="clearFormFields('update'); return true;" >
+				<label for="model">type the Model of the record you want to update the price of:</label>
+				<input type="text" id="model" name="model" required>
+				<br />
+				<label for="price">New Price:</label>
+				<input type="number" id="price" name="price" required>
+				<br />
+				<input type="submit" value="Update">
+			</form>
+		  </details>
+
+	<details style="font-size: 36px;color: darkslategray;">
+		<summary>delete record from Mobile Phone collection</summary>
+		<form style="font-size: 24px" id="delete" method="POST" action="mobilephoneDelete.php" onsubmit="clearFormFields('delete'); return true;" >
+            <label for="model">type the Model of the record you want to delete:</label>
+			<input type="text" id="model" name="model" required>
+			<br />
+			<input type="submit" value="Delete">
+		</form>
+	</details>
+</details>
+	<h1>\/ ON SCREEN CONSOLE \/</h1>
+	<div style="font-size: x-large;  background-color: black; color: white;" id="console"></div>
+
+	<script> 
+		//sets up an event listener that executes when the document is ready.
+		$(document).ready(function() 
+		{
+			//sets up an event listener that executes when a form is submitted.
+			$('form').submit(function(event) 
+			{
+				// prevent default form submission behavior.
+				event.preventDefault();
+
+				//gathers the form data using the jQuery serialize() method.
+				var formData = $(this).serialize();
+
+				// submit data with AJAX.
+				$.ajax(
+				{
+					//sets the URL of the server to which the form data will be submitted.
+					url: $(this).attr('action'),
+					//sets the HTTP method used to submit the form data.
+					type: $(this).attr('method'),
+					//sets the form data that will be submitted to the server.
+					data: formData,
+					//sets the function that will be executed if the server returns a successful response.
+					success: function(response) 
+					{
+						//logs the response to the console.
+						console.log(response);
+						
+					},
+					//sets the function that will be executed if the server returns an error response.
+					error: function(xhr, status, error) 
+					{
+						//logs the error response to the console.
+						console.log(xhr.responseText);
+					}
+				});
+			});
+		});
+
+		var consoleOutput = document.getElementById('console'); // onscreen console.
+		console.log = function(message) 
+		{
+			consoleOutput.innerHTML += message + '<br>'; //adding console messages to onscreen console.
+			
+		};
+
+		function validateTitle() //function to validate the title collumn.
+		{
+			const titleInput = document.getElementById("Title");
+			const title = titleInput.value.trim().toLowerCase();
+
+			if ( !["mx", "ms", "mr", "mrs", "miss", "dr", "other"].includes(title)) 
+			{ // if there is input in title field but input isnt the above then we prompt user to enter a valid one.
+				titleInput.setCustomValidity("Please enter a valid title (Mx, Ms, Mr, Mrs, Miss, Dr, or Other)");
+			} 
+			else 
+			{
+				titleInput.setCustomValidity("");
+			}
+		}
+
+
+		function clearFormFields(formId) //function for clearing input fields.
+		{
+			// Get the form element by ID.
+			const form = document.getElementById(formId);
+
+			// Wait for 1.5 seconds before clearing the form.
+			setTimeout(() => 
+			{
+				for (let i = 0; i < form.elements.length; i++) 
+				{
+					const element = form.elements[i];
+
+					// Clear the value of the element if it's an input or textarea.
+					if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.type !== 'submit') 
+					{
+						element.value = '';
+					}
+				}
+			}, 1500);
+		}
+
+	</script>
+
+</body>
+</html>
+
+
+<!-- brief description for my data modelling approach: 
+	ive used document based data modeling as mongodb is a document oriented NoSQL database,
+	due to this the data is stored in JSON like document 
+==================================================================================================-->

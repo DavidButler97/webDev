@@ -1,0 +1,10 @@
+{
+    "name": "dlbut/online-store",
+    "authors": [
+        {
+            "name": "DavidButler97",
+            "email": "dlbutler000@gmail.com"
+        }
+    ],
+    "require": { "mongodb/mongodb": "^1.10.0" }
+}
